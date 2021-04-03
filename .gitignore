@@ -33,3 +33,5 @@
 *.thm
 *.pdf
 .DS_Store
+_minted*
+__latexindent_temp.*

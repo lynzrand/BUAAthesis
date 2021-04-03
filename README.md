@@ -8,6 +8,18 @@
 
 目前仍在开发中，欢迎关注进展，提交 bug/issue，甚至贡献代码
 
+### 修改版说明
+
+这是 Rynco 修改过的模板，加入了以下内容：
+
+- 使用 `fancyvrb`, `fvextra` 和 `minted` 进行代码格式化。使用 `\begin{code}{<language>}` 产生的代码块将被缩进并可选标注行号。
+  
+  注：默认代码字体是 Iosevka，请替换成你喜欢的字体（因为格式对代码字体没有要求）
+
+- 修正了页眉的样式 (原版页眉会和标题打架，_It Works on My Machine™_)
+
+本 Fork 大概不会合并到主分支……吧。
+
 ## 预览
 
 项目发布了最新版本的编译好的 [PDF 样例文档](https://github.com/BHOSC/BUAAthesis/releases/latest) 供大家预览：

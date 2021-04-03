@@ -16,18 +16,21 @@ The LaTeX template for thesis of BUAA]
 % 本模板自身包含五个选项
 % 前四个为对应学位类型，决定不同样式
 % 第五个为颜色选项，用于电子版的情况
+% 第六个决定是否在代码块显示行号
 \newif\ifbuaa@bachelor\buaa@bachelorfalse
 \newif\ifbuaa@master\buaa@mastertrue
 \newif\ifbuaa@engineer\buaa@engineerfalse
 \newif\ifbuaa@doctor\buaa@doctorfalse
 \newif\ifbuaa@color\buaa@colorfalse
 \newif\ifbuaa@twoteacher\buaa@twoteacherfalse
+\newif\ifbuaa@linenumber\buaa@linenumberfalse
 \DeclareOption{bachelor}{\buaa@bachelortrue}
 \DeclareOption{master}{\buaa@mastertrue}
 \DeclareOption{engineer}{\buaa@engineertrue}
 \DeclareOption{doctor}{\buaa@doctortrue}
 \DeclareOption{color}{\buaa@colortrue}
 \DeclareOption{twoteacher}{\buaa@twoteachertrue}
+\DeclareOption{linenumber}{\buaa@codelinenumbertrue}
 % 其余选项传递给ctexbook
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{ctexbook}}
 \ProcessOptions\relax
@@ -45,6 +48,7 @@ The LaTeX template for thesis of BUAA]
 \RequirePackage{amsmath,amssymb,amsfonts,mathrsfs,bm}
 \RequirePackage[amsmath,thmmarks,hyperref]{ntheorem}
 \RequirePackage{txfonts}
+\RequirePackage{xeCJK}
 
 %%%%%%%%%% hyphen %%%%%%%%%%
 % For the `\hyp{}` command. Allow the user to insert `hyp{}` manually to
@@ -54,6 +58,13 @@ The LaTeX template for thesis of BUAA]
 % 主要字体为Times New Roman和宋体
 % 模板某些标题需要华文行楷和32号字
 \setmainfont{Times New Roman}
+\setmonofont[
+    Contextuals={Alternate},
+    NFSSFamily=codefont,
+]{Iosevka Extended}
+
+\def\verbatim@nolig@list{}
+
 % 不需要设置CJKmainfont，ctex 宏包已经很好的处理了
 % 不仅设置了粗体为黑体，斜体为楷体，还兼容了winfonts和adobefonts
 % 直接设置反而会在只有adobefonts的情况下报错
@@ -76,7 +87,7 @@ The LaTeX template for thesis of BUAA]
 
 \RequirePackage{geometry}
 \newgeometry{
-    top=30mm, bottom=25mm, left=30mm, right=20mm,
+    top=30mm, bottom=25mm, left=30mm, right=20mm, headheight=10mm,
     headsep=5mm, includefoot
 }
 \savegeometry{bachelorgeometry}
@@ -91,6 +102,8 @@ The LaTeX template for thesis of BUAA]
 \else
     \loadgeometry{mastergeometry}
 \fi
+
+\RequirePackage{changepage}
 
 %%%%%%%%%% space %%%%%%%%%%
 % 其他间距
@@ -328,50 +341,44 @@ The LaTeX template for thesis of BUAA]
 %%%%%%%%%% code %%%%%%%%%%
 % 代码
 
-% Listing 的设置请参考 http://en.wikibooks.org/wiki/LaTeX/Packages/Listings
-\RequirePackage{listings}
-\lstset{
-    backgroundcolor=\color{white},
-    basicstyle=\zihao{5}\ttfamily,
-    columns=flexible,
-    breakatwhitespace=false,
-    breaklines=true,
-    captionpos=b,
-    frame=single,
-    numbers=left,
-    numbersep=5pt,
-    showspaces=false,
-    showstringspaces=false,
-    showtabs=false,
-    stepnumber=1,
-    rulecolor=\color{black},
-    tabsize=2,
-    texcl=true,
-    title=\lstname,
-    escapeinside={\%*}{*)},
-    extendedchars=false,
-    mathescape=true,
-    xleftmargin=3em,
-    xrightmargin=3em,
+\RequirePackage{fvextra}
+\fvset{
+    fontfamily=codefont,
+    fontsize=\footnotesize,
+    breaklines,
+    breakanywhere,
+    numbers=left
 }
+\RequirePackage{minted}
+
+
 \ifbuaa@color
-    \lstset{
-        numberstyle=\color{gray},
-        keywordstyle=\color{blue},
-        commentstyle=\color{dkgreen},
-        stringstyle=\color{mauve},
-    }
+    \usemintedstyle{friendly}
+    \renewcommand\theFancyVerbLine{
+        \color{gray}\ttfamily\itshape\scriptsize{\arabic{FancyVerbLine}}}
 \else
-    \lstset{
-        numberstyle=\color{black},
-        keywordstyle=\color{black},
-        commentstyle=\color{black},
-        stringstyle=\color{black},
-    }
+    \usemintedstyle{bw}
+    \renewcommand\theFancyVerbLine{\ttfamily\itshape\scriptsize{\arabic{FancyVerbLine}}}
 \fi
 
-% 重命名Listings标题头
-\renewcommand{\lstlistingname}{代码}
+% 代码块相对其他部分应该缩进
+\newenvironment{code}[2][]{
+    \VerbatimEnvironment
+    \begin{adjustwidth}{2em}{}
+    \begin{minted}[autogobble,#1]{#2}%
+}{
+    \end{minted}
+    \end{adjustwidth}
+}
+
+\newenvironment{plaintext}[1][]{
+    \VerbatimEnvironment
+    \begin{adjustwidth}{2em}{}
+    \begin{Verbatim}[#1]%
+}{
+    \end{Verbatim}
+    \end{adjustwidth}
+}
 
 %%%%%%%%%% theorem %%%%%%%%%%
 % 定理
