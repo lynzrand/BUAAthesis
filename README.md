@@ -30,9 +30,11 @@
 
 ## 最佳实践
 
-** 目前学院的要求是毕设论文必须以 Word 格式提交，这给使用 LaTeX
+> 软件学院支持直接提交 PDF 文档，好耶！
+
+~~目前学院的要求是毕设论文必须以 Word 格式提交，这给使用 LaTeX
 模板书写毕设论文的同学带来了诸多不便。为此，我们推荐使用在线工
-具将 PDF 文档转为 Word 格式：**
+具将 PDF 文档转为 Word 格式：~~
 
 [https://cloud.gonitro.com/](https://cloud.gonitro.com/) 需注册，经过尝试本链接效果更好，可以较好处理目录、段落格式和字体等问题。
 
@@ -46,14 +48,15 @@
 
 目前已经测试的 LaTeX 发行版包括：
 
-+ TeXLive 2015、TeXLive 2016、TeXLive 2019（** 推荐 **）
-+ CTeX 2.9.3
++ ~~TeXLive 2015、TeXLive 2016、TeXLive 2019（** 推荐 **）~~
++ ~~CTeX 2.9.3~~
++ MiKTeX-XeTeX 4.3 (MiKTeX 21.3)
 
 对于老版本的 LaTeX 发行版，请通过包管理器升级 ctex 的版本。
 
 ## 使用方法
 
-1. 可以使用命令行或 PowerShell 等，配合项目中的 `mamske.bat` 批处理文件进行编译，详细使用方法请见 `mamske.bat` 文件；
+1. ~~可以使用命令行或 PowerShell 等，配合项目中的 `mamske.bat` 批处理文件进行编译，详细使用方法请见 `mamske.bat` 文件；~~
 
 2. 使用 Makefile，需要所使用的命令行环境支持 Make，cd 到 BUAAthesis 相应目录，目前支持以下功能
 
