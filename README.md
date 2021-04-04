@@ -15,6 +15,17 @@
 - 使用 `fancyvrb`, `fvextra` 和 `minted` 进行代码格式化。使用 `\begin{code}{<language>}` 产生的代码块将被缩进并可选标注行号。
   
   注：默认代码字体是 Iosevka，请替换成你喜欢的字体（因为格式对代码字体没有要求）
+  
+  如果你使用了 `latexindent` 格式化文档，请在与被格式化文件同一文件夹下的 `.latexindent.yaml` 中加入以下内容：
+  
+  ```yml
+  verbatimEnvironments:
+    code: 1
+    plaintext: 1
+    verbatim: 1
+    Verbatim: 1
+    minted: 1
+  ```
 
 - 修正了页眉的样式 (原版页眉会和标题打架，_It Works on My Machine™_)
 
