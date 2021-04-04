@@ -16,7 +16,6 @@ The LaTeX template for thesis of BUAA]
 % 本模板自身包含五个选项
 % 前四个为对应学位类型，决定不同样式
 % 第五个为颜色选项，用于电子版的情况
-% 第六个决定是否在代码块显示行号
 \newif\ifbuaa@bachelor\buaa@bachelorfalse
 \newif\ifbuaa@master\buaa@mastertrue
 \newif\ifbuaa@engineer\buaa@engineerfalse
@@ -24,13 +23,15 @@ The LaTeX template for thesis of BUAA]
 \newif\ifbuaa@color\buaa@colorfalse
 \newif\ifbuaa@twoteacher\buaa@twoteacherfalse
 \newif\ifbuaa@linenumber\buaa@linenumberfalse
+
 \DeclareOption{bachelor}{\buaa@bachelortrue}
 \DeclareOption{master}{\buaa@mastertrue}
 \DeclareOption{engineer}{\buaa@engineertrue}
 \DeclareOption{doctor}{\buaa@doctortrue}
 \DeclareOption{color}{\buaa@colortrue}
 \DeclareOption{twoteacher}{\buaa@twoteachertrue}
-\DeclareOption{linenumber}{\buaa@codelinenumbertrue}
+\DeclareOption{linenumber}{\buaa@linenumbertrue}
+
 % 其余选项传递给ctexbook
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{ctexbook}}
 \ProcessOptions\relax
@@ -48,6 +49,7 @@ The LaTeX template for thesis of BUAA]
 \RequirePackage{amsmath,amssymb,amsfonts,mathrsfs,bm}
 \RequirePackage[amsmath,thmmarks,hyperref]{ntheorem}
 \RequirePackage{txfonts}
+\RequirePackage{relsize}
 \RequirePackage{xeCJK}
 
 %%%%%%%%%% hyphen %%%%%%%%%%
@@ -60,7 +62,7 @@ The LaTeX template for thesis of BUAA]
 \setmainfont{Times New Roman}
 \setmonofont[
     Contextuals={Alternate},
-    NFSSFamily=codefont,
+    NFSSFamily=monofont,
 ]{Iosevka Extended}
 
 \def\verbatim@nolig@list{}
@@ -343,12 +345,14 @@ The LaTeX template for thesis of BUAA]
 
 \RequirePackage{fvextra}
 \fvset{
-    fontfamily=codefont,
-    fontsize=\footnotesize,
+    fontfamily=monofont,
+    fontsize=\relsize{-0.5},
     breaklines,
-    breakanywhere,
-    numbers=left
+    breakanywhere
 }
+\ifbuaa@linenumber
+    \fvset{numbers=left}
+\fi
 \RequirePackage{minted}
 
 
