@@ -67,9 +67,11 @@
 
 3. 使用 Visual Studio Code 等软件进行编译，请使用 `xelatex->bibtex->xelatex*2` 方式进行编译；
 
+4. 使用 `arara` 进行编译
+
 ## 参考文献相关
 
-模板参考文献格式采用国家标准 `GB/T 7714-2005` 《信息与文献 参考文献著录规则》之中描述的格式。代码实现为 `CTeX-org / gbt7714-bibtex-style` v2.0.1[https://github.com/CTeX-org/gbt7714-bibtex-style/](https://github.com/CTeX-org/gbt7714-bibtex-style/)。参考文献详细说明请见该项目 README.md 或 [https://mirror.ctan.org/biblio/bibtex/contrib/gbt7714/gbt7714.pdf](https://mirror.ctan.org/biblio/bibtex/contrib/gbt7714/gbt7714.pdf)。
+模板参考文献格式采用国家标准 `GB/T 7714-2015` 《信息与文献 参考文献著录规则》之中描述的格式。代码实现为 `CTeX-org / gbt7714-bibtex-style` v2.0.1[https://github.com/CTeX-org/gbt7714-bibtex-style/](https://github.com/CTeX-org/gbt7714-bibtex-style/)。参考文献详细说明请见该项目 README.md 或 [https://mirror.ctan.org/biblio/bibtex/contrib/gbt7714/gbt7714.pdf](https://mirror.ctan.org/biblio/bibtex/contrib/gbt7714/gbt7714.pdf)。
 
 参考文献提供两种排序方式，分别为 ` 按出现顺序 `（默认）和 ` 按作者姓名和年份 `，请按需在模板 `data\reference.tex` 中做相应修改。
 

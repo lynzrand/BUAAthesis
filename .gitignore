@@ -26,12 +26,16 @@
 *.ps
 *.snm
 *.synctex.gz
+*.synctex(busy)
 *.toc
 *.vrb
 *.xdy
+*.xdv
 *.swp
 *.thm
 *.pdf
 .DS_Store
 _minted*
 __latexindent_temp.*
+!/figure/*.pdf
+/figure/*-converted-to.pdf
