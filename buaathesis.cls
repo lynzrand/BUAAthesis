@@ -211,12 +211,16 @@ The LaTeX template for thesis of BUAA]
             name={,、},
             aftername={\ },
             number={\arabic{subsubsection}},
+            beforeskip={0pt},
+            afterskip={0pt},
         },
         paragraph={
             format={\zihao{-4}\indent},
             name={(,)},
             aftername={\ },
             number={\arabic{paragraph}},
+            beforeskip={0pt},
+            afterskip={0pt},
         },
     }
 \else
