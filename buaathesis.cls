@@ -61,11 +61,14 @@ The LaTeX template for thesis of BUAA]
 % 模板某些标题需要华文行楷和32号字
 \setmainfont{Times New Roman}
 \setmonofont[
+    Scale=0.95,
     Contextuals={Alternate},
     NFSSFamily=monofont,
-]{Iosevka Extended}
-
-\def\verbatim@nolig@list{}
+]{Sarasa Mono SC}
+\setCJKmonofont[
+    Scale=0.95,
+    Contextuals={Alternate},
+]{Sarasa Mono SC}
 
 % 不需要设置CJKmainfont，ctex 宏包已经很好的处理了
 % 不仅设置了粗体为黑体，斜体为楷体，还兼容了winfonts和adobefonts
@@ -89,7 +92,7 @@ The LaTeX template for thesis of BUAA]
 
 \RequirePackage{geometry}
 \newgeometry{
-    top=30mm, bottom=25mm, left=30mm, right=20mm, headheight=10mm,
+    top=30mm, bottom=25mm, left=30mm, right=20mm, headheight=15mm,
     headsep=5mm, includefoot
 }
 \savegeometry{bachelorgeometry}
@@ -190,17 +193,30 @@ The LaTeX template for thesis of BUAA]
         aftername={\quad},
         beforeskip={.5\baselineskip},
         afterskip={.5\baselineskip},
-    },
+    }
 }
 
 \ifbuaa@bachelor
     \ctexset{
+        secnumdepth=5,
         chapter={
             name={,},
             number={\arabic{chapter}},
         },
         section={
             format={\zihao{-4}\heiti},
+        },
+        subsubsection={
+            format={\zihao{-4}\indent},
+            name={,、},
+            aftername={\ },
+            number={\arabic{subsubsection}},
+        },
+        paragraph={
+            format={\zihao{-4}\indent},
+            name={(,)},
+            aftername={\ },
+            number={\arabic{paragraph}},
         },
     }
 \else
@@ -345,10 +361,10 @@ The LaTeX template for thesis of BUAA]
 
 \RequirePackage{fvextra}
 \fvset{
-    fontfamily=monofont,
-    fontsize=\relsize{-0.5},
-    breaklines,
-    breakanywhere
+    % fontfamily=monofont,
+    % fontsize=\relsize{-1},
+    baselinestretch=1.15,
+    breaklines
 }
 \ifbuaa@linenumber
     \fvset{numbers=left}
@@ -365,24 +381,17 @@ The LaTeX template for thesis of BUAA]
     \renewcommand\theFancyVerbLine{\ttfamily\itshape\scriptsize{\arabic{FancyVerbLine}}}
 \fi
 
-% 代码块相对其他部分应该缩进
-\newenvironment{code}[2][]{
-    \VerbatimEnvironment
-    \begin{adjustwidth}{2em}{}
-    \begin{minted}[autogobble,#1]{#2}%
-}{
-    \end{minted}
-    \end{adjustwidth}
-}
 
-\newenvironment{plaintext}[1][]{
-    \VerbatimEnvironment
-    \begin{adjustwidth}{2em}{}
-    \begin{Verbatim}[#1]%
-}{
-    \end{Verbatim}
-    \end{adjustwidth}
-}
+
+% 代码块相对其他部分应该缩进
+\newenvironment{code}[2][]
+    {\VerbatimEnvironment\vspace{0.2em}\begin{minted}[autogobble,xleftmargin=2em,#1]{#2}}
+    {\end{minted}\vspace{0.2em}}
+    
+\DefineVerbatimEnvironment{plaintext}{Verbatim}{xleftmargin=2em}
+
+\def\verbatim@nolig@list{}
+
 
 %%%%%%%%%% theorem %%%%%%%%%%
 % 定理
